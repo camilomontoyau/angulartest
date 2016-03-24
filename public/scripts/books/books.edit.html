@@ -1,0 +1,83 @@
+<h2>Actualizar Colegio {{ colegioEdit.colegioObject.nombreColegio }}</h2>
+<div id="searchBoxes">
+  <form class="form-horizontal well" >
+      
+      <div class="form-group" ng-class="{'has-error': colegioEdit.errorObject.codigoMen}">
+        <label for="inputCodigoMen" class="col-sm-4 control-label" >Código Men</label>
+        <div class="col-sm-4">
+          <input type="text" id="inputCodigoMen" class="form-control" placeholder="Código del ministerio" ng-model="colegioEdit.colegioObject.codigoMen" required="required" >
+          <span class="help-block" ng-repeat="error in colegioEdit.errorObject.codigoMen">{{ error }}</span>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': colegioEdit.errorObject.codigoDepartamento}">
+        <label for="selCodigoDpto" class="col-sm-4 control-label">Departamento</label>
+        <div class="col-sm-4">
+          <select id="selCodigoDpto" class="form-control"  ng-model="colegioEdit.colegioObject.codigoDepartamento" required="required" ng-change="colegioEdit.mpios()" ng-options="dpto.codigoDepartamento as dpto.nombreDepartamento for dpto in colegioEdit.departamentos" ></select>
+
+          <span class="help-block" ng-repeat="error in colegioEdit.errorObject.codigoDepartamento">{{ error }}</span>
+        </div>
+      </div>
+      
+      <div class="form-group" ng-class="{'has-error': colegioEdit.errorObject.codigoMunicipio}">
+        <label for="selCodigoMpio" class="col-sm-4 control-label">Municipio</label>
+        <div class="col-sm-4">
+          <select id="selCodigoMpio" class="form-control"  ng-model="colegioEdit.colegioObject.codigoMunicipio" required="required" ng-options="mpio.codigoMunicipio as mpio.nombreMunicipio for mpio in colegioEdit.municipios" ></select>
+          <span class="help-block" ng-repeat="error in colegioEdit.errorObject.codigoMunicipio">{{ error }}</span>
+        </div>
+      </div>
+
+      
+
+      <div class="form-group" ng-class="{'has-error': colegioEdit.errorObject.secretaria}">
+        <label for="inputSecretaria" class="col-sm-4 control-label">Secretaria</label>
+        <div class="col-sm-4">
+          <input type="text" id="inputSecretaria" class="form-control" placeholder="Secretaria" ng-model="colegioEdit.colegioObject.secretaria" required="required" >
+          <span class="help-block" ng-repeat="error in colegioEdit.errorObject.secretaria">{{ error }}</span>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': colegioEdit.errorObject.nombreColegio}">
+        <label for="inputNombreColegio" class="col-sm-4 control-label">Nombre Colegio</label>
+        <div class="col-sm-4">
+          <input type="text" id="inputNombreColegio" class="form-control" placeholder="Nombre Colegio" ng-model="colegioEdit.colegioObject.nombreColegio" required="required" >
+          <span class="help-block" ng-repeat="error in colegioEdit.errorObject.nombreColegio">{{ error }}</span>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': colegioEdit.errorObject.telefonoColegio}">
+        <label for="inputTelefonoColegio" class="col-sm-4 control-label">Teléfono Colegio</label>
+        <div class="col-sm-4">
+          <input type="text" id="inputTelefonoColegio" class="form-control" placeholder="Teléfono Colegio" ng-model="colegioEdit.colegioObject.telefonoColegio" required="required" >
+          <span class="help-block" ng-repeat="error in colegioEdit.errorObject.telefonoColegio">{{ error }}</span>
+        </div>
+      </div>
+
+      <div class="form-group"  ng-class="{'has-error': colegioEdit.errorObject.emailColegio}" >
+        <label for="inputEmailColegio" class="col-sm-4 control-label">Email Colegio</label>
+        <div class="col-sm-4">
+          <input type="text" id="inputEmailColegio" class="form-control" placeholder="Email Colegio" ng-model="colegioEdit.colegioObject.emailColegio" required="required" >
+          <span class="help-block" ng-repeat="error in colegioEdit.errorObject.emailColegio">{{ error }}</span>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': colegioEdit.errorObject.codigosSanMartin}">
+        <label for="inputCodigosSanMartin" class="col-sm-4 control-label">Códigos San Martín</label>
+        <div class="col-sm-4">
+          <input type="text" id="inputCodigosSanMartin" class="form-control" placeholder="1, 2, 20, 30" ng-model="colegioEdit.colegioObject.codigosSanMartin" required="required" >
+          <span class="help-block" ng-repeat="error in colegioEdit.errorObject.codigosSanMartin">{{ error }}</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-4">
+          
+        </div>
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-primary" ng-click="colegioEdit.update()">Actualizar <i class="fa fa-pencil-square-o"></i></button>
+        </div>
+
+      </div>
+      
+  </form>
+</div>

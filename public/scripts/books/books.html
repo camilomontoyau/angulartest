@@ -1,0 +1,83 @@
+<h2>Colegios</h2>
+<div id="searchBoxes">
+	<form class="form-horizontal">
+		<div class="form-group">
+	    	<label for="inputBuscar" class="col-sm-4 control-label">Filtro general</label>
+	    	<div class="col-sm-4">
+	    		<input type="text" id="inputBuscar" class="form-control" placeholder="Filtra por cualquiera de los campos" ng-model="colegio.globalSearchColegios.$" autofocus>
+	    	</div>
+
+	  	</div>
+
+	</form>
+	<button type="button" ng-click="collapsed=!collapsed" class="btn btn-link btn-sm">Busqueda avanzada <i class="fa fa-minus-square-o" ng-show="collapsed"></i><i class="fa fa-plus-square-o" ng-hide="collapsed"></i></button>
+	<button type="button" ng-click="colegio.create()" class="btn btn-link btn-sm">Crear Nuevo </i><i class="fa fa-plus"></i></button>
+	<form class="form-horizontal well" ng-show="collapsed">
+		<div class="form-group">
+	    	<label for="inputSelect" class="col-sm-4 control-label">Campo de busqueda</label>
+	    	<div class="col-sm-4">
+	    		<select class="form-control" ng-model="colegio.selBusquedaAvanzada">
+	    			<option value="nombreColegio">Nombre Colegio</option>
+	    			<option value="codigoMen">Código MEN</option>
+	    			<option value="nombreDepartamento">Departamento</option>
+	    			<option value="nombreMunicipio">Municipio</option>
+	    			<option value="secretaria">Secretaría</option>
+	    		</select>
+	    	</div>
+	    </div>
+	  	<div class="form-group">
+	    	<label for="inputBuscar" class="col-sm-4 control-label">Texto busqueda</label>
+	    	<div class="col-sm-4">
+	    		<input type="text" id="inputBuscar" class="form-control" placeholder="Ingrese acá el texto de busqueda" ng-model="colegio.txtBusquedaAvanzada" my-enter="colegio.search()" >
+	    	</div>
+
+	  	</div>
+	  	<button type="button" class="btn btn-primary" ng-click="colegio.search()">Buscar <i class="fa fa-search"></i></button>
+	</form>
+	
+</div>
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr> 
+				<!--<th>ID</th>-->
+				<th>
+					Código MEN<br>
+					<input type="text" class="form-control input-sm" ng-model="colegio.globalSearchColegios.codigoMen">
+	    		</th>
+				<th>
+					Departamento<br>
+					<input type="text" class="form-control input-sm" ng-model="colegio.globalSearchColegios.nombreDepartamento">
+	    		</th>
+	    		<th>
+					Municipio<br>
+					<input type="text" class="form-control input-sm" ng-model="colegio.globalSearchColegios.nombreMunicipio">
+	    		</th>
+				<th>
+					Secretaría<br>
+					<input type="text" class="form-control input-sm" ng-model="colegio.globalSearchColegios.secretaria">
+				</th>
+				<th>
+					Nombre Colegio<br>
+					<input type="text" class="form-control input-sm" ng-model="colegio.globalSearchColegios.nombreColegio">
+				</th>
+				<th class="action-buttons1"></th>
+			</tr> 
+		</thead> 
+		<tbody> 
+			<tr ng-repeat="col in colegio.colegios | filter:colegio.globalSearchColegios" > 
+				<!--<td>{{col._id}}</td>-->
+				<td>{{col.codigoMen}}</td>
+				<td>
+					{{col.departamento[0].nombreDepartamento}}
+				</td>
+				<td>{{col.municipio[0].nombreMunicipio}}</td>
+				<td>{{col.secretaria}}</td>
+				<td>{{col.nombreColegio}}</td>
+				<td>
+          			<a href="/#/colegios/{{col._id}}/edit" class="btn btn-link"><i class="fa fa-pencil"></i></a><button type="button" ng-click="colegio.delete(col._id)" class="btn btn-link"><i class="fa fa-trash"></i></button>
+          		</td>
+			</tr> 
+		</tbody>
+	</table>
+</div>

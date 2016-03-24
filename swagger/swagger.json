@@ -13,38 +13,26 @@
 			"url":"http://www.apache.org/licenses/LICENSE-2.0.html"
 		}
 	},
-	"host":"localhost:40000",
+	"host":"localhost:9000",
 	"basePath":"/api/v0",
 	"tags":[
 		{
-			"name":"Auth",
-			"description":"Everything you need to authenticate",
-			"externalDocs":{
-				"description":"Find out more",
-				"url":"http://swagger.io"
-			}
-		},
-		{
-			"name":"Users",
-			"description":"Operations about user",
-			"externalDocs":{
-				"description":"Find out more about our store",
-				"url":"http://swagger.io"
-			}
+			"name":"Books",
+			"description":"Crud operations over books"
 		}
 	],
 	"schemes":[
 		"http"
 	],
 	"paths":{
-		"/authenticate":{
-			"post":{
+		"/books":{
+			"get":{
 				"tags":[
-					"Auth"
+					"Books"
 				],
-				"summary":"authenticate an API user",
-				"description":"Send the e-mail and password of a user to authenticate it",
-				"operationId":"authUser",
+				"summary":"Returns an Array of books",
+				"description":"This endpoint returns a list of book objects",
+				"operationId":"booksList",
 				"consumes":[
 					"application/json",
 					"application/xml"
@@ -54,98 +42,24 @@
 					"application/json"
 				],
 				"parameters":[
-					{
-						"in":"body",
-						"name":"body",
-						"description":"authentication object",
-						"required":true,
-						"schema":{
-							"$ref":"#/definitions/Auth"
-						}
-					}
-				],
-				"responses":{
-					"403":{
-						"description":"Authentication failed. Wrong user or password."
-					},
-					"200":{
-						"description":"Authentication worked fine, and you are authenticated"
-					}
-				}
-			}
-		},
-		"/me":{
-			"get":{
-				"tags":[
-					"Auth"
-				],
-				"summary":"Returns the current user",
-				"description":"If a user is authenticated it will be return that user object",
-				"operationId":"authMe",
-				"consumes":[
-					"application/json",
-					"application/xml"
-				],
-				"produces":[
-					"application/xml",
-					"application/json"
+
 				],
 				"responses":{
 					"403":{
 						"description":"Failed to verify token or token not provided."
 					},
 					"200":{
-						"description":"Returns the current authenticated user"
-					}
-				}
-			}
-		},
-		"/users":{
-			"get":{
-				"tags":[
-					"Users"
-				],
-				"summary":"Returns an Array of users",
-				"description":"This endpoint retuns a list of user objects",
-				"operationId":"usersList",
-				"consumes":[
-					"application/json",
-					"application/xml"
-				],
-				"produces":[
-					"application/xml",
-					"application/json"
-				],
-				"parameters":[
-					{
-						"in":"query",
-						"name":"email",
-						"description":"email",
-						"type":"string"
-					},
-					{
-						"in":"query",
-						"name":"type",
-						"description":"type of user",
-						"type":"string"
-					}
-				],
-				"responses":{
-					"403":{
-						"description":"Failed to verify token or token not provided."
-					},
-					"200":{
-						"description":"Returns Array of user objects"
+						"description":"Returns Array of book objects"
 					}
 				}
 			},
 			"post":{
 				"tags":[
-					"Users"
+					"Books"
 				],
-				"summary":"Creates a user",
-				"description":"With this endpoint you can create a user",
-				"operationId":"usersCreate",
+				"summary":"Creates a Book",
+				"description":"With this endpoint you can create a Book",
+				"operationId":"booksCreate",
 				"consumes":[
 					"application/json",
 					"application/xml"
@@ -158,10 +72,10 @@
 					{
 						"in":"body",
 						"name":"body",
-						"description":"User Object",
+						"description":"Book Object",
 						"required":true,
 						"schema":{
-							"$ref":"#/definitions/UserPost"
+							"$ref":"#/definitions/BookPost"
 						}
 					}
 				],
@@ -170,7 +84,7 @@
 						"description":"Failed to verify token or token not provided."
 					},
 					"201":{
-						"description":"User is created, and returns the current User"
+						"description":"Book is created, and returns the current Book"
 					},
 					"400":{
 						"description":"Error because a mandatory property is missed, or other user Error"
@@ -178,14 +92,14 @@
 				}
 			}
 		},
-		"/users/{userId}":{
+		"/books/{bookId}":{
 			"get":{
 				"tags":[
-					"Users"
+					"Books"
 				],
-				"summary":"Get a user record",
-				"description":"This returns a user object putting its userId in the path",
-				"operationId":"usersFindById",
+				"summary":"Get a Book record",
+				"description":"This returns a Book object putting its bookId in the path",
+				"operationId":"booksFindById",
 				"consumes":[
 					"application/json",
 					"application/xml"
@@ -196,10 +110,10 @@
 				],
 				"parameters":[
 					{
-						"name":"userId",
+						"name":"bookId",
 						"in":"path",
 						"required":true,
-						"description":"ID of pet that needs to be updated",
+						"description":"ID of book that needs to be updated",
 						"type":"string"
 					}
 				],
@@ -208,10 +122,10 @@
 						"description":"Failed to verify token or token not provided."
 					},
 					"200":{
-						"description":"Returns a user object"
+						"description":"Returns a book object"
 					},
 					"404":{
-						"description":"if the user is not found"
+						"description":"if the book is not found"
 					},
 					"500":{
 						"description":"If Cast to ObjectId failed for value or internal server error"
@@ -220,11 +134,11 @@
 			},
 			"put":{
 				"tags":[
-					"Users"
+					"Books"
 				],
-				"summary":"Update a user",
-				"description":"With this endpoint you can update a user object",
-				"operationId":"usersUpdate",
+				"summary":"Update a book",
+				"description":"With this endpoint you can update a book object",
+				"operationId":"booksUpdate",
 				"consumes":[
 					"application/json",
 					"application/xml"
@@ -237,17 +151,17 @@
 					{
 						"in":"body",
 						"name":"body",
-						"description":"User Object",
+						"description":"Book Object",
 						"required":true,
 						"schema":{
-							"$ref":"#/definitions/UserPost"
+							"$ref":"#/definitions/BookPost"
 						}
 					},
 					{
-						"name":"userId",
+						"name":"bookId",
 						"in":"path",
 						"required":true,
-						"description":"ID of pet that needs to be updated",
+						"description":"ID of book that needs to be updated",
 						"type":"string"
 					}
 				],
@@ -256,13 +170,13 @@
 						"description":"Failed to verify token or token not provided."
 					},
 					"200":{
-						"description":"User is created, and returns the current User"
+						"description":"Book is created, and returns the current Book"
 					},
 					"400":{
 						"description":"Error because a mandatory property is missed, or other user Error"
 					},
 					"404":{
-						"description":"if the user is not found"
+						"description":"if the book is not found"
 					},
 					"500":{
 						"description":"If Cast to ObjectId failed for value or internal server error"
@@ -271,11 +185,11 @@
 			},
 			"delete":{
 				"tags":[
-					"Users"
+					"Books"
 				],
-				"summary":"Deletes a user record",
-				"description":"Delete a user record with its ID",
-				"operationId":"usersDelete",
+				"summary":"Deletes a book record",
+				"description":"Deletes a book record with its ID",
+				"operationId":"booksDelete",
 				"consumes":[
 					"application/json",
 					"application/xml"
@@ -286,10 +200,10 @@
 				],
 				"parameters":[
 					{
-						"name":"userId",
+						"name":"bookId",
 						"in":"path",
 						"required":true,
-						"description":"ID of pet that needs to be updated",
+						"description":"ID of book that needs to be updated",
 						"type":"string"
 					}
 				],
@@ -298,10 +212,10 @@
 						"description":"Failed to verify token or token not provided."
 					},
 					"204":{
-						"description":"The user was deleted successfully"
+						"description":"The book was deleted successfully"
 					},
 					"404":{
-						"description":"if the user is not found"
+						"description":"if the book is not found"
 					},
 					"500":{
 						"description":"If Cast to ObjectId failed for value or internal server error"
@@ -318,49 +232,35 @@
 		}
 	},
 	"definitions":{
-		"Auth":{
+		"BookPost":{
 			"type":"object",
 			"required":[
-				"email",
-				"password"
+				"title",
+				"description",
+				"image",
+				"authorId"
 			],
 			"properties":{
-				"email":{
+				"title":{
 					"type":"string",
-					"example":"camilomontoya2@gmail.com"
+					"example":"The lord of the rings"
 				},
-				"password":{
+				"description":{
 					"type":"string",
-					"example":"test4echo"
+					"example":"This is a description example"
+				},
+				"image":{
+					"type":"string",
+					"example":"Image url"
+				},
+				"authorId":{
+					"type":"string",
+					"example":"Author ID"
 				}
+
 			},
 			"xml":{
-				"name":"Pet"
-			}
-		},
-		"UserPost":{
-			"type":"object",
-			"required":[
-				"email",
-				"password",
-				"type"
-			],
-			"properties":{
-				"email":{
-					"type":"string",
-					"example":"camilomontoya2@gmail.com"
-				},
-				"password":{
-					"type":"string",
-					"example":"test4echo"
-				},
-				"type":{
-					"type":"string",
-					"example":"admin_user"
-				}
-			},
-			"xml":{
-				"name":"Pet"
+				"name":"Book"
 			}
 		}
 	},

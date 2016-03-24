@@ -18,10 +18,12 @@ app.use(bodyParser.json());
 
 
 // Routes
+
+app.use('/', express.static('public'));
 app.use('/api/v0', api);
 app.use('/swagger', express.static('swagger'));
 
 
 // Start server
-app.listen(40000);
-console.log("go to http://localhost:40000");
+app.listen(config.appPort);
+console.log("go to http://localhost:"+config.appPort);
