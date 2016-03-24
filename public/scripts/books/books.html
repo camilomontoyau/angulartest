@@ -37,22 +37,22 @@
 			</tr> 
 		</thead> 
 		<tbody> 
-			<tr ng-repeat="book in book.books | filter:book.globalSearchBooks" >
+			<tr ng-repeat="b in book.books | filter:book.globalSearchBooks" >
 				<td>
-					{{ book.title }}
+					{{ b.title }}
 				</td>
 				<td>
-					{{ book.description }}
+					{{ b.description }}
 				</td>
 				<td>
-					<img src="{{ book.image }}">
+					<img src="{{ b.image }}">
 				</td>
 				<td>
-					{{ book.authorId }}
+					{{ b.authorId }}
 				</td>
 				<td>
-          			<a href="/#/books/{{ book._id }}/edit" class="btn btn-link"><i class="fa fa-pencil"></i></a>
-					<button type="button" ng-click="book.delete(book._id)" class="btn btn-link"><i class="fa fa-trash"></i></button>
+          			<a href="/#/books/{{ b._id }}/edit" class="btn btn-link"><i class="fa fa-pencil"></i></a>
+					<button type="button" ng-click="book.delete(b._id)" class="btn btn-link"><i class="fa fa-trash"></i></button>
           		</td>
 			</tr> 
 		</tbody>
