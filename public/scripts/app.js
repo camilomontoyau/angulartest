@@ -14,28 +14,15 @@ var myApp = angular.module('qualitApp', ['ngRoute','ui.router', 'ngCookies'])
 		templateUrl: "/scripts/books/books.html",
 		controller: "booksCtrl",
 		controllerAs:"book"
-	})
-	.state("books-edit", {
-		url: "/books/{id}/edit",
-		templateUrl: "/scripts/books/books.edit.html",
-		controller: "booksEditCtrl",
-		controllerAs:"bookEdit"
 	}).state("books-create", {
 		url: "/books/create",
 		templateUrl: "/scripts/books/books.create.html",
 		controller: "booksCreateCtrl",
 		controllerAs:"bookCreate"
+	}).state("books-edit", {
+		url: "/books/{id}/edit",
+		templateUrl: "/scripts/books/books.edit.html",
+		controller: "booksEditCtrl",
+		controllerAs:"bookEdit"
 	});
-})
-.directive('myEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.myEnter);
-                });
-				event.preventDefault();
-            }
-        });
-    };
 });

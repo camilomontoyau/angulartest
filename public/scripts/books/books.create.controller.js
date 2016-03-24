@@ -1,12 +1,12 @@
-angular.module('qualitApp').controller("colegiosCreateCtrl",function ($state, $http, $cookies, $stateParams, colegiosService, departamentosService, municipiosService) {
+angular.module('qualitApp').controller("booksCreateCtrl",function ($state, $http, $cookies, $stateParams, booksService, authorsService) {
 	var me = this;
 	
 	me.errorObject = {};
 
-	me.dptos = function(){
-		departamentosService.getAll().then(
+	me.getAuthors = function(){
+		authorsService.getAll().then(
 			function (response){
-				me.departamentos = response;
+				me.authors = response;
 			},
 			function(error){
 				alert('something went wrong');
@@ -15,41 +15,24 @@ angular.module('qualitApp').controller("colegiosCreateCtrl",function ($state, $h
 		);	
 	};
 
-	me.dptos();
-
-	me.mpios = function(){
-		municipiosService.search("codigoDepartamento", me.colegioObject.codigoDepartamento).then(
-			function (response){
-				me.municipios = response;
-			},
-			function(error){
-				alert('something went wrong');
-				console.error(error);
-			}
-		);	
-	};
-
-	
-
-
+	me.getAuthors();
 
 	me.create = function(){
-		colegiosService.create(me.colegioObject).then(
+		booksService.create(me.bookObject).then(
 			function (response){
-				me.colegioObject = response;
+				me.bookObject = response;
 				me.errorObject = {};
-				alert("El Colegio ha sido creado exitosamente!");
-				$state.go("colegios");
+				alert("Book Has been created!");
+				$state.go("books");
 			},
 			function(error){
 				switch(error.status){
 					case 409:
-						me.errorObject = error.data.error.errors;
+						me.errorObject = error.data;
 					break;
 
 					default:
 						alert('something went wrong');
-						console.error(error);
 					break;
 				}
 			}

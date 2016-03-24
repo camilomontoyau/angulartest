@@ -1,10 +1,10 @@
-angular.module('qualitApp').controller("colegiosCtrl",function ($state, $http, $cookies, colegiosService, departamentosService) {
+angular.module('qualitApp').controller("booksCtrl",function ($state, $http, $cookies, booksService) {
 		var me = this;
 		
 		me.refresh = function(){
-			colegiosService.getAll().then(
+			booksService.getAll().then(
 				function (response){
-					me.colegios = response;
+					me.books = response;
 				},
 				function(error){
 					alert('something went wrong');
@@ -16,43 +16,15 @@ angular.module('qualitApp').controller("colegiosCtrl",function ($state, $http, $
 		me.refresh();
 
 		me.create = function(){
-			$state.go("colegios-create");
-		}
-
-		me.search = function(){
-			if(
-				typeof me.selBusquedaAvanzada!='undefined' 
-				&& typeof me.txtBusquedaAvanzada!='undefined' 
-				&& me.selBusquedaAvanzada.length > 0 
-				&& me.txtBusquedaAvanzada.length > 0 
-			)
-			{
-				if(!isFinite(me.txtBusquedaAvanzada)){
-					me.txtBusquedaAvanzada = me.txtBusquedaAvanzada.toUpperCase();
-				}
-
-				colegiosService.search(me.selBusquedaAvanzada,me.txtBusquedaAvanzada).then(
-					function (response){
-						me.colegios = response;
-					},
-					function(error){
-						alert('something went wrong');
-						console.error(error);
-					}
-				);
-			}
-			else{
-				alert("Por favor seleccione el campo de busqueda y escriba el texto a buscar");
-			}
+			$state.go("books-create");
 		};
 
-		me.delete = function(colegioId){
-			var r = confirm("Realmente desea eliminar el colegio? No podrá deshacer esta acción!");
+		me.delete = function(bookId){
+			var r = confirm("Do you really want to delete this record?");
 			if(r===true){
-				colegiosService.delete(colegioId).then(
+				booksService.delete(bookId).then(
 					function (response){
-						alert("Colegio eliminado!");
-						//me.colegios = response;
+						alert("Record has been deleted!");
 						me.refresh();
 					},
 					function(error){

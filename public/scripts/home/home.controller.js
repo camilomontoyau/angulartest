@@ -1,4 +1,4 @@
-angular.module('softwareAcademico').controller("homeCtrl",function ($state, $http, $cookies) {
+angular.module('qualitApp').controller("homeCtrl",function ($state, $http, $cookies) {
 		var homeController = this;
 		var prefix = '/api/v0';
 		homeController.login = function(){
