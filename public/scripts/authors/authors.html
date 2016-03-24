@@ -1,0 +1,54 @@
+<h2>Authors</h2>
+<div id="searchBoxes">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="inputBuscar" class="col-sm-4 control-label">Filter</label>
+            <div class="col-sm-4">
+                <input type="text" id="inputBuscar" class="form-control" placeholder="Filter"
+                       ng-model="author.globalSearchAuthors.$" autofocus>
+            </div>
+        </div>
+    </form>
+    <button type="button" ng-click="author.create()" class="btn btn-link btn-sm">New author</i><i class="fa fa-plus"></i></button>
+
+
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <!--<th>ID</th>-->
+            <th>
+                Name<br>
+                <input type="text" class="form-control input-sm" ng-model="author.globalSearchAuthors.name">
+            </th>
+            <th>
+                Nationality<br>
+                <input type="text" class="form-control input-sm" ng-model="author.globalSearchAuthors.nationality">
+            </th>
+            <th>
+                Author ID<br>
+                <input type="text" class="form-control input-sm" ng-model="author.globalSearchAuthors.authorId">
+            </th>
+            <th class="action-buttons1"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="a in author.authors | filter:author.globalSearchAuthors" >
+            <td>
+                {{ a.name }}
+            </td>
+            <td>
+                {{ a.nationality }}
+            </td>
+            <td>
+                {{ a.authorId }}
+            </td>
+            <td>
+                <a href="/#/authors/{{ a._id }}/edit" class="btn btn-link"><i class="fa fa-pencil"></i></a>
+                <button type="button" ng-click="author.delete(a._id)" class="btn btn-link"><i class="fa fa-trash"></i></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

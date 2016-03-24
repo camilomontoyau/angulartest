@@ -8,8 +8,7 @@ var myApp = angular.module('qualitApp', ['ngRoute','ui.router', 'ngCookies'])
 		templateUrl: "/scripts/home/home.html",
 		controller: "homeCtrl",
 		controllerAs: 'home'
-	})
-	.state("books", {
+	}).state("books", {
 		url: "/books",
 		templateUrl: "/scripts/books/books.html",
 		controller: "booksCtrl",
@@ -24,5 +23,10 @@ var myApp = angular.module('qualitApp', ['ngRoute','ui.router', 'ngCookies'])
 		templateUrl: "/scripts/books/books.edit.html",
 		controller: "booksEditCtrl",
 		controllerAs:"bookEdit"
+	}).state("authors", {
+		url: "/authors",
+		templateUrl: "/scripts/authors/authors.html",
+		controller: "authorsCtrl",
+		controllerAs:"author"
 	});
 });
