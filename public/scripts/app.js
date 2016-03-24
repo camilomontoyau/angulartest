@@ -28,5 +28,15 @@ var myApp = angular.module('qualitApp', ['ngRoute','ui.router', 'ngCookies'])
 		templateUrl: "/scripts/authors/authors.html",
 		controller: "authorsCtrl",
 		controllerAs:"author"
+	}).state("authors-create", {
+		url: "/authors/create",
+		templateUrl: "/scripts/authors/authors.create.html",
+		controller: "authorsCreateCtrl",
+		controllerAs:"authorCreate"
+	}).state("authors-edit", {
+		url: "/authors/{id}/edit",
+		templateUrl: "/scripts/authors/authors.edit.html",
+		controller: "authorsEditCtrl",
+		controllerAs:"authorEdit"
 	});
 });

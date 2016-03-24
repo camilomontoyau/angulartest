@@ -33,6 +33,26 @@ Book.before('post',validateBook)
 Book.register(router, '/books');
 
 Author.methods(['get','put','post','delete']);
+
+function validateAuthor(req, res, next) {
+    var rules = {
+        name: 'required',
+        nationality:'required',
+        authorId:'required'
+    };
+
+    var validation = new Validator(req.body, rules);
+
+    if(validation.fails()===true){
+        console.log(validation.errors.all());
+        return res.status(409).json(validation.errors.all());
+    }
+    next();
+}
+
+Author.before('post',validateAuthor)
+    .before('put', validateAuthor);
+
 Author.register(router, '/authors');
 
 module.exports = router;
