@@ -2,8 +2,8 @@
 	"swagger":"2.0",
 	"info":{
 		"description":"Swagger documentation for user-service rest API",
-		"version":"0.2.0",
-		"title":"User Service API",
+		"version":"0.0.1",
+		"title":"Library API",
 		"termsOfService":"http://swagger.io/terms/",
 		"contact":{
 			"email":"camilomontoya2@gmail.com"
@@ -19,6 +19,10 @@
 		{
 			"name":"Books",
 			"description":"Crud operations over books"
+		},
+		{
+			"name":"Authors",
+			"description":"Crud operations over authors"
 		}
 	],
 	"schemes":[
@@ -222,6 +226,204 @@
 					}
 				}
 			}
+		},
+		"/authors":{
+			"get":{
+				"tags":[
+					"Authors"
+				],
+				"summary":"Returns an Array of Authors",
+				"description":"This endpoint returns a list of Author objects",
+				"operationId":"authorsList",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"200":{
+						"description":"Returns Array of book objects"
+					}
+				}
+			},
+			"post":{
+				"tags":[
+					"Authors"
+				],
+				"summary":"Creates an Author",
+				"description":"With this endpoint you can create an Author",
+				"operationId":"authorsCreate",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+					{
+						"in":"body",
+						"name":"body",
+						"description":"Author Object",
+						"required":true,
+						"schema":{
+							"$ref":"#/definitions/AuthorPost"
+						}
+					}
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"201":{
+						"description":"Author is created, and returns the current Author"
+					},
+					"400":{
+						"description":"Error because a mandatory property is missed, or other user Error"
+					}
+				}
+			}
+		},
+		"/authors/{authorId}":{
+			"get":{
+				"tags":[
+					"Authors"
+				],
+				"summary":"Get an Author record",
+				"description":"This returns an Author object putting its authorId in the path",
+				"operationId":"authorsFindById",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+					{
+						"name":"authorId",
+						"in":"path",
+						"required":true,
+						"description":"ID of author that needs to be queried",
+						"type":"string"
+					}
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"200":{
+						"description":"Returns a author object"
+					},
+					"404":{
+						"description":"if the author is not found"
+					},
+					"500":{
+						"description":"If Cast to ObjectId failed for value or internal server error"
+					}
+				}
+			},
+			"put":{
+				"tags":[
+					"Authors"
+				],
+				"summary":"Update an Author",
+				"description":"With this endpoint you can update an Author object",
+				"operationId":"authorsUpdate",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+					{
+						"in":"body",
+						"name":"body",
+						"description":"Author Object",
+						"required":true,
+						"schema":{
+							"$ref":"#/definitions/AuthorPost"
+						}
+					},
+					{
+						"name":"authorId",
+						"in":"path",
+						"required":true,
+						"description":"ID of author that needs to be updated",
+						"type":"string"
+					}
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"200":{
+						"description":"author is updated, and returns the current author"
+					},
+					"400":{
+						"description":"Error because a mandatory property is missed, or other user Error"
+					},
+					"404":{
+						"description":"if the author is not found"
+					},
+					"500":{
+						"description":"If Cast to ObjectId failed for value or internal server error"
+					}
+				}
+			},
+			"delete":{
+				"tags":[
+					"Authors"
+				],
+				"summary":"Deletes an Author record",
+				"description":"Deletes a Author record with its ID",
+				"operationId":"authorDelete",
+				"consumes":[
+					"application/json",
+					"application/xml"
+				],
+				"produces":[
+					"application/xml",
+					"application/json"
+				],
+				"parameters":[
+					{
+						"name":"authorId",
+						"in":"path",
+						"required":true,
+						"description":"ID of author that needs to be updated",
+						"type":"string"
+					}
+				],
+				"responses":{
+					"403":{
+						"description":"Failed to verify token or token not provided."
+					},
+					"204":{
+						"description":"The author was deleted successfully"
+					},
+					"404":{
+						"description":"if the author is not found"
+					},
+					"500":{
+						"description":"If Cast to ObjectId failed for value or internal server error"
+					}
+				}
+			}
 		}
 	},
 	"securityDefinitions":{
@@ -261,6 +463,32 @@
 			},
 			"xml":{
 				"name":"Book"
+			}
+		},
+		"AuthorPost":{
+			"type":"object",
+			"required":[
+				"name",
+				"nationality",
+				"authorId"
+			],
+			"properties":{
+				"name":{
+					"type":"string",
+					"example":"Stephen King"
+				},
+				"nationality":{
+					"type":"string",
+					"example":"American"
+				},
+				"authorId":{
+					"type":"string",
+					"example":"Author ID"
+				}
+
+			},
+			"xml":{
+				"name":"Author"
 			}
 		}
 	},
