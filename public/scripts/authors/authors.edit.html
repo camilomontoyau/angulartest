@@ -1,0 +1,41 @@
+<h2>New Author {{ authorEdit.authorObject.name }}</h2>
+<div id="searchBoxes">
+    <form class="form-horizontal well" >
+
+        <div class="form-group" ng-class="{'has-error': authorEdit.errorObject.name}">
+            <label for="inputName" class="col-sm-4 control-label" >Name</label>
+            <div class="col-sm-4">
+                <input type="text" id="inputName" class="form-control" placeholder="Name"
+                       ng-model="authorEdit.authorObject.name" required="required" >
+                <span class="help-block" ng-repeat="error in authorEdit.errorObject.name">{{ error }}</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': authorEdit.errorObject.nationality}">
+            <label for="inputNationality" class="col-sm-4 control-label" >Nationality</label>
+            <div class="col-sm-4">
+                <input type="text" id="inputNationality" class="form-control" placeholder="Nationality"
+                       ng-model="authorEdit.authorObject.nationality" required="required" >
+                <span class="help-block" ng-repeat="error in authorEdit.errorObject.nationality">{{ error }}</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': authorEdit.errorObject.authorId}">
+            <label for="inputAuthorId" class="col-sm-4 control-label" >Author ID</label>
+            <div class="col-sm-4">
+                <input type="text" id="inputAuthorId" class="form-control" placeholder="Author ID"
+                       ng-model="authorEdit.authorObject.authorId" required="required" >
+                <span class="help-block" ng-repeat="error in authorEdit.errorObject.authorId">{{ error }}</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-primary" ng-click="authorEdit.update()">Create <i class="fa fa-pencil-square-o"></i></button>
+            </div>
+
+        </div>
+
+    </form>
+</div>

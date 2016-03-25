@@ -25,7 +25,7 @@ angular.module('qualitApp').controller("authorsCtrl",function ($state, $http, $c
     me.delete = function(authorId){
         var r = confirm("Do you really want to delete this record?");
         if(r===true){
-            booksService.delete(bookId).then(
+            authorsService.delete(authorId).then(
                 function (response){
                     alert("Record has been deleted!");
                     me.refresh();
