@@ -5,6 +5,7 @@
   - Mongoose v4.4.3
   - node-restful v0.2.5
   - node v4.3.1
+  - AngularJS 
  
 
 ### Installation
